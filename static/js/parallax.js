@@ -31,6 +31,7 @@
   /* === Card grid balancer ============================================ */
   var MIN_CARD = 210;   // px — keep in sync with the comment in CSS
   var GAP      = 12;
+  var MAX_PER_ROW = 3;  // never wider than 3 cards on a row
   function balance() {
     var grids = document.querySelectorAll('.lr-card-grid');
     for (var i = 0; i < grids.length; i++) {
@@ -38,7 +39,7 @@
       var n = parseInt(g.dataset.n, 10) || g.children.length;
       var w = g.clientWidth;
       var maxFit = Math.max(1, Math.floor((w + GAP) / (MIN_CARD + GAP)));
-      var perRow = Math.min(maxFit, n);
+      var perRow = Math.min(maxFit, n, MAX_PER_ROW);
       var rows   = Math.ceil(n / perRow);
       var cols   = Math.ceil(n / rows);
       g.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
@@ -54,4 +55,23 @@
   window.addEventListener('resize', onResize);
   if (document.readyState !== 'loading') balance();
   else document.addEventListener('DOMContentLoaded', balance);
+
+  /* === Mobile menu auto-close ====================================== */
+  /* Bootstrap 4 leaves the burger-menu open after a link is tapped.
+     Close it whenever a nav link is clicked on a small screen. */
+  function wireMobileMenuClose() {
+    var menu = document.getElementById('navigation');
+    if (!menu) return;
+    var links = menu.querySelectorAll('a.nav-link');
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener('click', function () {
+        if (menu.classList.contains('show')) {
+          if (window.jQuery) window.jQuery(menu).collapse('hide');
+          else menu.classList.remove('show');
+        }
+      });
+    }
+  }
+  if (document.readyState !== 'loading') wireMobileMenuClose();
+  else document.addEventListener('DOMContentLoaded', wireMobileMenuClose);
 })();
