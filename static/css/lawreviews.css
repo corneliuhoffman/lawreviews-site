@@ -218,16 +218,26 @@ section .title p  { text-align: center !important; }
   backdrop-filter: blur(2px);
 }
 
-/* Hero two-column layout: copy on the left, product video on the right.
-   Collapses to a single column under ~900px. */
+/* Hero: title card on top, product video below — both full-width within
+   the container. */
 .hero-area .hero-grid {
   display: grid;
-  grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.2fr);
+  grid-template-columns: 1fr;
   gap: 28px;
-  align-items: center;
 }
-@media (max-width: 900px) {
-  .hero-area .hero-grid { grid-template-columns: 1fr; }
+.hero-area .block {
+  padding: 48px 56px !important;
+  text-align: center;
+}
+.hero-area .block h1 {
+  font-size: clamp(48px, 7vw, 96px) !important;
+  line-height: 1.05 !important;
+  margin: 0 0 18px !important;
+}
+.hero-area .block p {
+  font-size: clamp(16px, 1.4vw, 20px) !important;
+  max-width: 760px;
+  margin: 0 auto 22px !important;
 }
 .hero-area .hero-video {
   border-radius: 10px;
@@ -235,6 +245,8 @@ section .title p  { text-align: center !important; }
   border: 1px solid rgba(201,150,42,0.30);
   background: #0a0f1c;
   box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  max-width: 1000px;
+  margin: 0 auto;
 }
 .hero-area .hero-video video {
   display: block;
