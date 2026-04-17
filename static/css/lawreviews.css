@@ -36,7 +36,7 @@ body, .body-wrapper {
   top: -10vh; left: 0;
   width: 100vw;
   height: 500vh;
-  background-image: url('/img/manuscript_gold.jpg');
+  background-image: url('../img/manuscript_gold.jpg');
   background-color: #050505;
   background-repeat: repeat-y;
   background-position: center top;
