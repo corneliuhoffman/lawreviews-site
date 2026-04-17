@@ -218,6 +218,30 @@ section .title p  { text-align: center !important; }
   border: 1px solid rgba(201,150,42,0.30) !important;
   backdrop-filter: blur(2px);
 }
+
+/* Hero two-column layout: copy on the left, product video on the right.
+   Collapses to a single column under ~900px. */
+.hero-area .hero-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.2fr);
+  gap: 28px;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .hero-area .hero-grid { grid-template-columns: 1fr; }
+}
+.hero-area .hero-video {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(201,150,42,0.30);
+  background: #0a0f1c;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+}
+.hero-area .hero-video video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 .cta h2, section.cta h2 { color: var(--lr-gold-2) !important; }
 .cta p, section.cta p { color: var(--lr-fog) !important; }
 

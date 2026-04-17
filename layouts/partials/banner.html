@@ -2,12 +2,22 @@
 {{ if $data.banner.banner.enable }}
 {{ with $data.banner.banner }}
 <section class="hero-area">
-  <div class="block">
-    <h1>{{ .title | markdownify }}</h1>
-    <p>{{ .content | markdownify }}</p>
-    {{ if .button.enable }}{{ with .button }}
-    <a href="{{ .link }}" class="btn btn-transparent">{{ .label }}</a>
-    {{ end }}{{ end }}
+  <div class="container">
+    <div class="hero-grid">
+      <div class="block">
+        <h1>{{ .title | markdownify }}</h1>
+        <p>{{ .content | markdownify }}</p>
+        {{ if .button.enable }}{{ with .button }}
+        <a href="{{ .link }}" class="btn btn-transparent">{{ .label }}</a>
+        {{ end }}{{ end }}
+      </div>
+      <div class="hero-video">
+        <video autoplay muted loop playsinline preload="metadata"
+               poster="{{ "img/manuscript_gold.jpg" | relURL }}">
+          <source src="{{ "video/emailimport.mp4" | relURL }}" type="video/mp4">
+        </video>
+      </div>
+    </div>
   </div>
 </section>
 {{ end }}
