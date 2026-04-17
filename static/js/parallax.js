@@ -58,19 +58,22 @@
 
   /* === Mobile menu auto-close ====================================== */
   /* Bootstrap 4 leaves the burger-menu open after a link is tapped.
-     Close it whenever a nav link is clicked on a small screen. */
+     Use jQuery delegation so we catch the click regardless of whether
+     other handlers (smooth-scroll etc.) also fire for the same event. */
   function wireMobileMenuClose() {
-    var menu = document.getElementById('navigation');
-    if (!menu) return;
-    var links = menu.querySelectorAll('a.nav-link');
-    for (var i = 0; i < links.length; i++) {
-      links[i].addEventListener('click', function () {
-        if (menu.classList.contains('show')) {
-          if (window.jQuery) window.jQuery(menu).collapse('hide');
-          else menu.classList.remove('show');
-        }
-      });
+    if (!window.jQuery) {
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('.navbar-collapse a.nav-link');
+        if (!a) return;
+        var menu = document.querySelector('.navbar-collapse.show');
+        if (menu) menu.classList.remove('show');
+      }, true);
+      return;
     }
+    window.jQuery(document).on('click', '.navbar-collapse a.nav-link', function () {
+      var $m = window.jQuery('.navbar-collapse');
+      if ($m.hasClass('show')) $m.collapse('hide');
+    });
   }
   if (document.readyState !== 'loading') wireMobileMenuClose();
   else document.addEventListener('DOMContentLoaded', wireMobileMenuClose);
