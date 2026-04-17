@@ -89,13 +89,12 @@ body, .body-wrapper {
 .navigation .navbar-brand,
 .navigation a { color: var(--lr-fog) !important; }
 
-/* Replace Meghna PNG logo with a text wordmark */
-.navigation .navbar-brand img,
-.logo img { display: none !important; }
-.navigation .navbar-brand::after,
-.logo::after { content: "Law Reviews"; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #fff; }
-.navigation .navbar-brand::after { color: #fff; }
-.navigation .navbar-brand:hover::after { color: var(--lr-gold) !important; }
+/* Wordmark styling — brand is already rendered as text in the partial */
+.navigation .navbar-brand {
+  font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+  color: #fff !important;
+}
+.navigation .navbar-brand:hover { color: var(--lr-gold) !important; }
 
 /* Only the hero stays transparent so the manuscript shows through.
    Every other section is its own opaque "page" — they stack over

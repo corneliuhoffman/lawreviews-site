@@ -1,7 +1,6 @@
 {{ define "main" }}
 {{ $d := index .Site.Data .Site.Language.Lang }}
 
-{{ partial "navigation.html" . }}
 {{ partial "banner.html" . }}
 
 {{ partial "card-section" (dict "id" "about"    "data" $d.about.about) }}
