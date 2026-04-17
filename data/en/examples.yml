@@ -1,0 +1,17 @@
+examples:
+  enable : true
+  title : "What it looks like in practice"
+  subtitle : "Three real questions. Answered in seconds, not hours."
+  items :
+    - title : "Litigation"
+      icon : ti-comment-alt
+      meta : '"What''s the latest position on the Nexus v Castellan settlement?"'
+      content : "Returns the most recent email thread, AI summary (£310,000 mediator recommendation accepted by client; payment due 31 July) and the linked settlement agreement draft."
+    - title : "Firm-wide search"
+      icon : ti-search
+      meta : '"Show me every matter we''ve had with Hartwell & Stone as opposing solicitors."'
+      content : "Cross-references the solicitor table with matter records. Returns 7 matters with case references, current status and the supervising partner — ready before a difficult call."
+    - title : "Commercial property"
+      icon : ti-folder
+      meta : '"Which leases for Landwell Homes expire in the next six months?"'
+      content : "Schema-driven: the lease schema includes a term end date field. A single query surfaces 12 leases sorted by date, with the responsible partner and tenant for each."

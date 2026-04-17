@@ -1,0 +1,10 @@
+cta:
+  enable : true
+  bg_image : "images/backgrounds/bg-white-wall.jpg"
+  bg_image_webp : "images/backgrounds/bg-white-wall.webp"
+  title : "See it on your own data"
+  content : "Two-week paid pilot on a real matter. Fixed fee. If it doesn't pay for itself in saved fee-earner hours, you walk away."
+  button:
+    enable : true
+    label : "Request a Demo"
+    link : "mailto:corneliuhoffman@gmail.com?subject=Law%20Reviews%20Demo%20Request"

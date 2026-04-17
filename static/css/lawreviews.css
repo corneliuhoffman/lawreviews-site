@@ -1,0 +1,732 @@
+/* Law Reviews — dark navy + gold overlay on top of Meghna theme.
+   Palette mirrors the pitch deck:
+     #0F1F3D primary navy   #1A3260 mid navy   #C9962A gold accent
+     #E8B84B light gold     #E8ECF2 off-white  #8A9AB5 muted text */
+
+:root {
+  --lr-navy:        #0F1F3D;
+  --lr-navy-2:      #1A3260;
+  --lr-gold:        #C9962A;
+  --lr-gold-2:      #E8B84B;
+  --lr-fog:         #E8ECF2;
+  --lr-mute:        #8A9AB5;
+}
+
+/* === Site-wide background === Calligraphic legal-writing parchment.
+       The SVG is fixed-attachment on <body>, so every section scrolls
+       over the same illuminated manuscript and the page reads as one
+       continuous parallax instead of repeating per section. */
+/* Magna Carta manuscript pre-tinted (gold ink on black) inside an SVG
+   that bakes the colour matrix in — so we can use it as a plain CSS
+   background-image and parallax it. */
+html { background: #050505 !important; color: var(--lr-fog) !important; }
+body, .body-wrapper {
+  background: transparent !important;
+  color: var(--lr-fog) !important;
+  position: relative;            /* anchor for the absolute-positioned nav */
+}
+/* Hero needs to be a positioning context so the nav can sit inside it */
+.hero-area, section.hero-area { position: relative; }
+
+/* Moving manuscript background — tiled vertically and made far taller
+   than the viewport so the parallax translation never runs out the
+   bottom. JS animates transform: translateY on scroll. */
+.lr-bg-layer {
+  position: fixed;
+  top: -10vh; left: 0;
+  width: 100vw;
+  height: 500vh;
+  background-image: url('/img/manuscript_gold.jpg');
+  background-color: #050505;
+  background-repeat: repeat-y;
+  background-position: center top;
+  background-size: 100vw auto;
+  z-index: -1;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* === Header / nav === Sticky at the top. Transparent bar lets the
+   manuscript show through; each link is its own chunky pill-button
+   that reads against the parchment. */
+.navigation.sticky-top, section.sticky-top.navigation {
+  position: sticky !important;
+  top: 0;
+  z-index: 50;
+}
+.navigation, .navigation .navbar, .navbar-default,
+.navbar.affix, .navbar.affix-top {
+  background: rgba(5, 8, 14, 0.35) !important;   /* barely-there band */
+  border-bottom: 1px solid rgba(201,150,42,0.25) !important;
+  padding: 10px 0 !important;
+  backdrop-filter: blur(1px);
+}
+.navigation .container { max-width: 1240px !important; }
+.navigation .navbar { padding: 0 !important; }
+.navigation .navbar-nav { gap: 8px; }
+
+/* Nav link = pill button with its own translucent dark plate, so the
+   manuscript bleeds through — big click target, readable copy. */
+.navigation .navbar-nav > li > a {
+  color: var(--lr-fog) !important;
+  padding: 12px 20px !important;
+  font-size: 15px !important;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: rgba(10, 15, 28, 0.55) !important;
+  border: 1px solid rgba(201,150,42,0.25) !important;
+  border-radius: 999px !important;
+  margin: 0 2px !important;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.navigation .navbar-nav > li > a:hover,
+.navigation .navbar-nav > li.active > a {
+  color: var(--lr-navy) !important;
+  background: var(--lr-gold-2) !important;
+  border-color: var(--lr-gold-2) !important;
+}
+.navigation .navbar-brand { padding: 4px 12px !important; }
+.navigation .navbar-brand,
+.navigation a { color: var(--lr-fog) !important; }
+
+/* Replace Meghna PNG logo with a text wordmark */
+.navigation .navbar-brand img,
+.logo img { display: none !important; }
+.navigation .navbar-brand::after,
+.logo::after { content: "Law Reviews"; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #fff; }
+.navigation .navbar-brand::after { color: #fff; }
+.navigation .navbar-brand:hover::after { color: var(--lr-gold) !important; }
+
+/* Only the hero stays transparent so the manuscript shows through.
+   Every other section is its own opaque "page" — they stack over
+   each other and cover the top page as the user scrolls down. */
+.banner-area, .hero-area, section.hero-area {
+  background: transparent !important;
+  background-image: none !important;
+  position: relative;
+  z-index: 0;               /* first page sits UNDER the rest */
+  overflow: hidden;         /* clip the parallaxed hero copy so it
+                               can't bleed into the section below */
+}
+section.lr-card-section, section#about, section#feature, section.feature,
+section#services, section#where, section#examples, section#trust,
+section#pricing, section.pricing, section.cta, .cta-area, .bg-one {
+  background: rgba(5, 8, 14, 0.55) !important;   /* manuscript shows through the section */
+  background-image: none !important;
+  position: relative;
+  z-index: 5;
+  box-shadow: 0 -18px 48px rgba(0,0,0,0.55);
+  /* Each section fills a viewport — cards sized up, section scales
+     vertically to match the window so each nav click lands on exactly
+     one "page". */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  padding: 48px 0 !important;
+  scroll-margin-top: 56px;
+}
+section.about > .container, section#feature > .container-fluid,
+section#services > .container, section#where > .container,
+section#examples > .container, section#trust > .container,
+section#pricing > .container, section.cta > .container { width: 100%; }
+/* Hero — kill the bg-image partial's inline background image so the
+   parchment shows; keep a strong vignette for the headline */
+.hero-area, .banner-area {
+  background-image: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.35)) !important;
+  background-attachment: scroll !important;
+}
+.banner-area h1, .banner-area .banner-title,
+.hero-area h1, .hero-area .block h1 {
+  color: var(--lr-gold-2) !important; font-weight: 800; letter-spacing: -0.02em;
+}
+.banner-area p, .hero-area .block p { color: var(--lr-fog) !important; opacity: 0.95; }
+
+/* === Buttons === */
+.btn, .btn-main, .btn-default, button.btn {
+  background: var(--lr-gold) !important;
+  border-color: var(--lr-gold) !important;
+  color: var(--lr-navy) !important;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 4px !important;
+}
+.btn:hover, .btn-main:hover, .btn-default:hover, button.btn:hover {
+  background: var(--lr-gold-2) !important;
+  border-color: var(--lr-gold-2) !important;
+  color: var(--lr-navy) !important;
+}
+
+/* === Section text === */
+section { color: var(--lr-fog) !important; padding: 28px 0 !important; }
+section .container { max-width: 1180px !important; }
+section .section-title h2, section h2.section-title, .title-area h2,
+section .title h2 {
+  color: var(--lr-gold-2) !important;
+  font-family: "EB Garamond","Cardo",Georgia,serif;
+  font-size: 24px !important;
+  line-height: 1.2 !important;
+  margin: 0 0 6px !important;
+}
+section .title p { font-size: 13px !important; color: var(--lr-mute) !important; margin: 0 0 8px !important; }
+section .section-title h2::after { background: var(--lr-gold) !important; }
+section h3, section h4 { color: #fff !important; }
+section p, section li { color: var(--lr-fog) !important; }
+hr { border-color: rgba(201,150,42,0.25) !important; }
+
+/* Override Meghna's teal accent .color span used inside section titles —
+   make it gold to stay on-palette */
+section .title h2 .color, section .title h2 span.color,
+.title h2 .color { color: var(--lr-gold) !important; }
+.border-meghna {
+  border-top: 2px solid rgba(201,150,42,0.35) !important;
+  width: 60px !important;
+  margin: 12px auto 24px !important;
+}
+.border-meghna::before, .border-meghna:before {
+  background: var(--lr-gold) !important;
+  background-color: var(--lr-gold) !important;
+  width: 50px !important;
+  height: 4px !important;
+}
+
+/* Every section gets a consistent one-row title card at the top — same
+   dark plate + gold border as the content cards below. */
+section .title {
+  background: #0a0f1c !important;
+  padding: 14px 20px 12px !important;
+  border-radius: 10px;
+  border: 1px solid rgba(201,150,42,0.30) !important;
+  backdrop-filter: blur(2px);
+  margin: 0 0 14px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+section .title .border-meghna { display: none !important; }   /* no extra rule in title cards */
+section .title p:last-child { margin-bottom: 0 !important; }
+section .title h2 { text-align: center !important; text-transform: none !important; }
+section .title p  { text-align: center !important; }
+
+.hero-area .block, .cta .container, section.cta .container {
+  background: #0a0f1c !important;
+  padding: 20px 24px !important;
+  border-radius: 10px;
+  border: 1px solid rgba(201,150,42,0.30) !important;
+  backdrop-filter: blur(2px);
+}
+.cta h2, section.cta h2 { color: var(--lr-gold-2) !important; }
+.cta p, section.cta p { color: var(--lr-fog) !important; }
+
+/* No section-wide dark overlay — let the parchment show. The cards
+   themselves carry their own background so text remains readable. */
+section::before { display: none !important; }
+section > .container, section > .container-fluid { position: relative; z-index: 1; }
+.hero-area::before, .banner-area::before { display: none !important; }
+
+/* === Hide the picture column in the Feature section === */
+section#feature .col-lg-6:first-child,
+section.feature .col-lg-6:first-child { display: none !important; }
+section#feature .col-lg-6:last-child,
+section.feature .col-lg-6:last-child { flex: 0 0 100% !important; max-width: 100% !important; }
+
+/* Kill Meghna's hard-coded blue-grey background on section-bg */
+section.section-bg, section.about-2, .section-bg { background: transparent !important; }
+section#feature .content-block .media i,
+section.feature .content-block .media i { color: var(--lr-gold) !important; }
+
+/* Wrap the whole content-block in a card so the heading + paragraph
+   read against the manuscript */
+section#feature .content-block, section.feature .content-block {
+  background: #0a0f1c !important;
+  border: 1px solid rgba(201,150,42,0.30) !important;
+  border-radius: 10px;
+  padding: 24px 32px !important;
+  backdrop-filter: blur(2px);
+  text-align: center;
+}
+section#feature .content-block > p,
+section.feature .content-block > p {
+  text-align: center; max-width: 760px; margin: 0 auto 16px !important;
+}
+section#feature .content-block h2,
+section.feature .content-block h2 {
+  color: var(--lr-gold-2) !important;
+  font-family: "EB Garamond","Cardo",Georgia,serif;
+  font-size: 24px !important;
+  text-align: center;
+  margin: 0 0 8px !important;
+}
+
+/* Each feature item (media block) gets its own inner card */
+section#feature .content-block .media,
+section.feature .content-block .media {
+  background: #0a0f1c !important;
+  border: 1px solid rgba(201,150,42,0.25) !important;
+  border-radius: 8px;
+  padding: 20px 18px !important;
+  margin-top: 16px !important;
+}
+section#feature .content-block .media h4,
+section.feature .content-block .media h4 { color: #fff !important; }
+
+/* === Cards: equal height via flex on the row, stretched blocks ===
+   Meghna markup we target:
+     About    : section.about        .row > .col-lg-4    > .block
+     Service  : section#services     .row > article.col  > .service-block
+     Feature  : section.feature      .row > .col          > .feature
+*/
+section.about .row, section#services .row, section.feature .row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: stretch !important;
+}
+section.about .row > [class*="col-"],
+section#services .row > [class*="col-"],
+section.feature .row > [class*="col-"] {
+  display: flex !important;
+  margin-bottom: 24px !important;
+}
+
+/* Make every card render as a card with equal height */
+/* === Unified card style — icon + title on the same row, paragraph
+   below, across every section.  We don't touch Meghna's HTML here;
+   CSS Grid + `display: contents` flattens the theme's `.content`
+   wrapper so the h3 and p become direct grid children alongside the
+   icon.  The `.card-head` wrapper my partials also produce works
+   with the same rules via the grouped selector below. */
+section .block .content, section .service-block .content,
+section .feature-item .content { display: contents; }
+section .block,
+section .service-block,
+section .feature-item,
+section .content-block .media,
+section#examples .block,
+section#trust .block,
+section#where .service-block,
+.price-item {
+  background: #0a0f1c !important;
+  border: 1px solid rgba(201, 150, 42, 0.30) !important;
+  color: var(--lr-fog) !important;
+  border-radius: 10px !important;
+  width: 100% !important;
+  display: grid !important;
+  grid-template-columns: auto 1fr !important;
+  grid-auto-rows: auto !important;
+  column-gap: 14px !important;
+  row-gap: 10px !important;
+  align-items: start !important;
+  text-align: left !important;
+  padding: 20px 18px !important;
+  min-height: 180px !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  font-family: "Anaheim", "Helvetica Neue", Arial, sans-serif;
+}
+/* Icon in column 1, heading in column 2, paragraphs (including optional
+   .card-meta) span both columns on subsequent rows. */
+section .block > .card-icon,
+section .block > .icon-box,
+section .service-block > .service-icon,
+section .feature-item > .icon-box {
+  grid-column: 1; grid-row: 1; align-self: center;
+  font-size: 32px !important; color: var(--lr-gold) !important;
+  margin: 0 !important;
+}
+section .block > h3 {
+  grid-column: 2; grid-row: 1; align-self: center; margin: 0 !important;
+}
+section .block > p, section .block > .card-meta {
+  grid-column: 1 / -1;
+}
+section .block > .card-meta {
+  font-size: 12px !important;
+  color: var(--lr-mute) !important;
+  margin: 0 0 4px !important;
+  font-style: italic;
+}
+section .block > .card-bullets {
+  grid-column: 1 / -1;
+  list-style: none;
+  margin: 4px 0 0 !important;
+  padding: 0 !important;
+}
+section .block > .card-bullets li {
+  font-size: 15px;
+  color: var(--lr-fog);
+  padding: 8px 0 8px 20px;
+  position: relative;
+  border-bottom: 1px solid rgba(201,150,42,0.10);
+}
+section .block > .card-bullets li:last-child { border-bottom: none; }
+section .block > .card-bullets li::before {
+  content: "•";
+  color: var(--lr-gold);
+  position: absolute;
+  left: 2px;
+  top: 6px;
+}
+/* Per-section card tinge — red / green / yellow / purple / orange / grey */
+section#about    .block { background: #1f0a0a !important; }  /* problem — red */
+section#feature  .block { background: #0a1f10 !important; }  /* solution — green */
+section#services .block { background: #1f1c0a !important; }  /* how — yellow */
+section#where    .block { background: #160a1f !important; }  /* where — purple */
+section#examples .block { background: #1f100a !important; }  /* what — orange */
+section#trust    .block { background: #17181a !important; }  /* features — grey */
+section#pricing  .block { background: #0e1422 !important; }  /* plans — cool slate */
+
+/* Card-grid layout — fixed column count (from partial's --cols var)
+   so the cards are evenly distributed across a single row when there's
+   room. Narrow viewports step down to fewer columns via media queries
+   — distribution stays balanced (3+3, 3+2, 2+2 rather than 4+1/5+1). */
+section.lr-card-section .container { max-width: 1500px !important; }
+section .lr-card-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 4), 1fr);
+  gap: 12px;
+  align-items: stretch;
+  width: 100%;
+}
+/* Balanced grid layout is computed in parallax.js — JS measures the
+   container width and picks ceil(N / ceil(N/maxFit)) columns so all
+   rows differ by at most 1 card. This works on any viewport (incl.
+   mobile) without arbitrary breakpoints. The default below is a sane
+   fallback before JS runs. */
+section .lr-card-grid > .block { height: 100%; }
+
+/* Title card sits above the grid, full width */
+section .lr-title {
+  background: #0a0f1c;
+  border: 1px solid rgba(201,150,42,0.30);
+  border-radius: 10px;
+  padding: 14px 20px 12px;
+  margin: 0 0 14px;
+  text-align: center;
+  backdrop-filter: blur(2px);
+}
+section .lr-title h2 {
+  color: var(--lr-gold-2) !important;
+  font-family: "EB Garamond","Cardo",Georgia,serif;
+  font-size: 24px;
+  line-height: 1.2;
+  margin: 0 0 6px;
+  text-transform: none;
+}
+section .lr-title p {
+  color: var(--lr-mute);
+  font-size: 13px;
+  margin: 0;
+}
+
+/* Kill Meghna's decorative hexagon pseudo-elements on .icon-box */
+section .icon-box, section .service-icon {
+  position: static !important;
+  width: auto !important; height: auto !important;
+  margin: 0 0 10px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  display: block !important;
+  text-align: left !important;
+}
+section .icon-box::before, section .icon-box::after,
+section .service-icon::before, section .service-icon::after {
+  content: none !important;
+  display: none !important;
+  background: transparent !important;
+  border: none !important;
+}
+section .icon-box i, section .service-icon i,
+section .block i, section .service-block i, section .feature-item i {
+  font-size: 22px !important;
+  color: var(--lr-gold) !important;
+  display: inline-block;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Unified card typography — same font + sizes everywhere */
+section .block h3, section .service-block h3, section .feature-item h3,
+section .content-block .media h4, section#examples .block h3,
+section#trust .block h3, .price-item h3 {
+  font-family: "Anaheim", "Helvetica Neue", Arial, sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  margin: 4px 0 6px !important;
+  line-height: 1.25 !important;
+  text-align: left !important;
+}
+section .block p, section .service-block p, section .feature-item p,
+section .content-block .media p, section#examples .block p,
+section#trust .block p, .price-item p {
+  font-family: "Anaheim", "Helvetica Neue", Arial, sans-serif !important;
+  font-size: 15px !important;
+  line-height: 1.55 !important;
+  color: var(--lr-fog) !important;
+  opacity: 0.92;
+  margin: 0 !important;
+  text-align: left !important;
+}
+section .block:hover,
+section .service-block:hover,
+section .feature-item:hover,
+section .content-block .media:hover,
+.price-item:hover {
+  border-color: var(--lr-gold) !important;
+  background: #162a4d !important;
+  transform: translateY(-2px);
+}
+
+/* Card text */
+section.about .block h3,
+section#services .service-block h3,
+section.feature .feature h3 { color: #fff !important; margin-top: 8px; }
+section.about .block p,
+section#services .service-block p,
+section.feature .feature p { color: var(--lr-fog) !important; opacity: 0.9; flex: 1; }
+
+/* Icons */
+section.about .icon-box i,
+section#services .service-icon i,
+section.feature .icon i,
+i[class^="ti-"] { color: var(--lr-gold) !important; }
+
+/* === About (Problem) — 5 items side-by-side so the section fits === */
+/* Title wrapper keeps full width; only the item cols drop to 20% */
+section.about .row > .col-lg-12 {
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin-bottom: 12px !important;
+}
+section.about .row > .col-lg-4 {
+  flex: 0 0 20% !important;
+  max-width: 20% !important;
+  padding: 0 6px !important;
+  margin-bottom: 0 !important;
+}
+section.about .block { padding: 16px 14px !important; text-align: center; }
+section.about .block h3 { font-size: 15px !important; margin: 6px 0 4px !important; line-height: 1.2; }
+section.about .block p { font-size: 12.5px !important; line-height: 1.4 !important; }
+section.about .icon-box i { font-size: 26px !important; }
+@media (max-width: 991px) {
+  section.about .row > [class*="col-"] { flex: 0 0 50% !important; max-width: 50% !important; }
+}
+@media (max-width: 575px) {
+  section.about .row > [class*="col-"] { flex: 0 0 100% !important; max-width: 100% !important; }
+}
+
+/* === New pitch-deck sections === */
+section#where .service-block { background: #0a0f1c !important; border:1px solid rgba(201,150,42,0.25) !important; border-radius:8px; padding:18px 16px !important; }
+section#where .service-block h3 { font-size:16px !important; margin:6px 0 2px !important; color:#fff !important; }
+section#where .service-block p  { font-size:13px !important; line-height:1.45 !important; }
+section#where .service-icon i   { font-size:28px !important; }
+
+/* (per-section card tinge is defined earlier in this stylesheet) */
+
+/* Trust — 6 items as 3×2 on desktop, compact */
+section#trust .row > [class*="col-"] { margin-bottom: 0 !important; }
+section#trust .block { padding: 14px 14px !important; min-height: 100%; }
+section#trust .block h3 { font-size: 15px !important; margin: 4px 0 4px !important; line-height: 1.2; }
+section#trust .block p  { font-size: 12.5px !important; line-height: 1.4 !important; }
+section#trust .icon-box i { font-size: 24px !important; }
+
+/* Examples — 3 cards in a row, compact so they fit a viewport */
+section#examples .row > [class*="col-"] { padding: 0 8px !important; margin-bottom: 8px !important; }
+section#examples .block { padding: 16px 16px !important; }
+section#examples .icon-box i { font-size: 24px !important; }
+
+/* Where — 4 cards in a row, also tightened */
+section#where .row > [class*="col-"] { padding: 0 6px !important; margin-bottom: 8px !important; }
+
+section#examples .example-tag {
+  display:inline-block; font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+  color: var(--lr-gold); border:1px solid rgba(201,150,42,0.35);
+  padding:3px 10px; border-radius:999px; margin-bottom:8px;
+}
+section#examples .example-question {
+  font-family: "EB Garamond","Cardo",Georgia,serif;
+  font-style: italic; color: var(--lr-gold-2) !important;
+  font-size: 18px !important; margin: 4px 0 10px !important;
+}
+section#examples .block p { font-size: 13px !important; line-height: 1.5 !important; }
+
+/* === Row layouts — every section fits one or two equal rows === */
+
+/* How it works — 4 cards → one row of 4 */
+section#services { padding: 24px 0 !important; }
+section#services .title { padding: 14px 24px !important; margin-bottom: 14px !important; }
+section#services .row { margin-left: -6px !important; margin-right: -6px !important; }
+section#services .row > article.col-lg-4 {
+  flex: 0 0 25% !important;
+  max-width: 25% !important;
+  margin-bottom: 0 !important;
+  padding: 0 6px !important;
+}
+
+/* Solution (Feature) — 5 cards → one row of 5 */
+section#feature .row > .col-lg-3 {
+  flex: 0 0 20% !important;
+  max-width: 20% !important;
+  padding: 0 6px !important;
+  margin-bottom: 0 !important;
+}
+
+/* Trust (Features) — 6 cards → two equal rows of 3 */
+section#trust .row > .col-lg-4 {
+  flex: 0 0 33.3333% !important;
+  max-width: 33.3333% !important;
+  padding: 0 6px !important;
+}
+
+/* Examples (What) — 3 cards → one row of 3 */
+section#examples .row > .col-lg-4 {
+  flex: 0 0 33.3333% !important;
+  max-width: 33.3333% !important;
+  padding: 0 6px !important;
+}
+
+/* Where — 4 cards → one row of 4 */
+section#where .row > .col-lg-3 {
+  flex: 0 0 25% !important;
+  max-width: 25% !important;
+  padding: 0 6px !important;
+}
+
+/* Pricing — 3 tiers → one row of 3 */
+section#pricing .row > .col-lg-3 {
+  flex: 0 0 33.3333% !important;
+  max-width: 33.3333% !important;
+  padding: 0 6px !important;
+}
+
+/* Hide the £ amount line inside each plan — section stays, prices go */
+section#pricing .price-title > p { display: none !important; }
+section#pricing .price-item .value { display: none !important; }
+section#services .service-block {
+  padding: 16px 18px !important;
+}
+section#services .service-block h3 {
+  font-size: 18px !important;
+  margin: 6px 0 4px !important;
+  line-height: 1.2 !important;
+}
+section#services .service-block p {
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+  margin: 0 !important;
+}
+section#services .service-icon i { font-size: 28px !important; }
+@media (max-width: 767px) {
+  section#services .row > article.col-lg-4 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* === Icons === */
+.feature-item i, .single-service i, .single-feature i, .about-item i,
+i[class^="ti-"] { color: var(--lr-gold) !important; }
+
+/* === Pricing tier cards — equal column alignment === */
+.pricing-area, section#pricing, .pricing.section { padding-bottom: 80px; }
+.pricing.section .row.justify-content-center { display: flex !important; align-items: stretch !important; flex-wrap: wrap; }
+.pricing.section .col-lg-3, .pricing.section .col-md-6 { display: flex !important; }
+
+.price-item {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: #0a0f1c !important;
+  border: 1px solid rgba(201, 150, 42, 0.35) !important;
+  border-radius: 8px;
+  padding: 0 !important;
+  overflow: hidden;
+  backdrop-filter: blur(2px);
+}
+
+.price-item .price-title {
+  background: var(--lr-navy-2) !important;
+  padding: 28px 16px !important;
+  border-bottom: 2px solid var(--lr-gold) !important;
+  min-height: 170px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+.price-item .price-title h3 {
+  color: #fff !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  margin: 0 0 14px !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.price-item .price-title p {
+  margin: 0 !important;
+  color: var(--lr-fog) !important;
+  font-size: 14px !important;
+}
+.price-item .price-title .value {
+  display: block;
+  color: var(--lr-gold-2) !important;
+  font-size: 44px !important;
+  font-weight: 800 !important;
+  margin-bottom: 4px;
+}
+
+.price-item ul {
+  list-style: none !important;
+  padding: 14px 18px !important;
+  margin: 0 !important;
+  flex: 1 !important;
+  background: transparent !important;
+}
+.price-item ul li {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(201, 150, 42, 0.12) !important;
+  color: var(--lr-fog) !important;
+  padding: 12px 4px !important;
+  font-size: 14px !important;
+}
+.price-item ul li:last-child { border-bottom: none !important; }
+
+.price-item > a.btn,
+.price-item > .btn {
+  margin: 14px 18px 22px !important;
+  background: var(--lr-gold) !important;
+  border-color: var(--lr-gold) !important;
+  color: var(--lr-navy) !important;
+}
+.price-item > a.btn:hover { background: var(--lr-gold-2) !important; border-color: var(--lr-gold-2) !important; }
+
+/* === CTA section === */
+.cta-area, section.cta {
+  background: linear-gradient(135deg, var(--lr-navy-2) 0%, var(--lr-navy) 100%) !important;
+  color: #fff !important;
+}
+.cta-area h2 { color: var(--lr-gold) !important; }
+
+/* === Footer === */
+footer, .footer-area, .footer { background: #08122A !important; color: var(--lr-mute) !important; border-top: 1px solid var(--lr-navy-2) !important; }
+footer a { color: var(--lr-gold) !important; }
+
+/* === Parallax sections (used by Andromeda-style backgrounds we add) === */
+.lr-parallax {
+  background-attachment: fixed !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  position: relative;
+}
+.lr-parallax::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(15,31,61,0.88), rgba(26,50,96,0.78));
+  z-index: 0;
+}
+.lr-parallax > .container, .lr-parallax > * { position: relative; z-index: 1; }

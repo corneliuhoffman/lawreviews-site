@@ -1,0 +1,37 @@
+/* Law Reviews — matches pitch deck: #0F1F3D navy, #C9962A gold */
+:root {
+  --color-neutral: 255, 255, 255;
+  /* Dark navy neutrals */
+  --color-neutral-50: 232, 236, 242;
+  --color-neutral-100: 210, 218, 228;
+  --color-neutral-200: 175, 188, 205;
+  --color-neutral-300: 138, 154, 181;
+  --color-neutral-400: 100, 120, 150;
+  --color-neutral-500: 61, 79, 107;
+  --color-neutral-600: 40, 58, 85;
+  --color-neutral-700: 26, 50, 96;
+  --color-neutral-800: 18, 35, 70;
+  --color-neutral-900: 15, 31, 61;
+  /* Gold primary */
+  --color-primary-50: 253, 248, 235;
+  --color-primary-100: 250, 238, 205;
+  --color-primary-200: 245, 220, 160;
+  --color-primary-300: 238, 200, 115;
+  --color-primary-400: 232, 184, 75;
+  --color-primary-500: 201, 150, 42;
+  --color-primary-600: 175, 130, 35;
+  --color-primary-700: 145, 108, 28;
+  --color-primary-800: 120, 90, 22;
+  --color-primary-900: 95, 72, 18;
+  /* Teal secondary (for badges/accents) */
+  --color-secondary-50: 230, 250, 248;
+  --color-secondary-100: 200, 242, 237;
+  --color-secondary-200: 155, 228, 218;
+  --color-secondary-300: 100, 210, 195;
+  --color-secondary-400: 50, 180, 165;
+  --color-secondary-500: 14, 138, 124;
+  --color-secondary-600: 10, 115, 105;
+  --color-secondary-700: 8, 95, 86;
+  --color-secondary-800: 6, 78, 70;
+  --color-secondary-900: 4, 62, 56;
+}

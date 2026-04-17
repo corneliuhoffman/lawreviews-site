@@ -1,0 +1,23 @@
+trust:
+  enable : true
+  title : "Features"
+  subtitle : "Built for law firms — privacy, control and choice by design."
+  items :
+    - title : "Choice of AI model"
+      icon : ti-bolt
+      content : "Claude, GPT-4, Mistral, DeepSeek — or run llama.cpp locally with no data leaving the firm's network. Switch per query, per user, or per matter."
+    - title : "Microsoft 365 native"
+      icon : ti-microsoft-alt
+      content : "Single sign-on via the firm's existing Entra (Azure AD) tenant. Documents remain in OneDrive / SharePoint; Law Reviews holds only metadata and AI summaries."
+    - title : "Full audit trail"
+      icon : ti-shield
+      content : "Every document version, every analysis run, every approval — plus billable hours and AI costs tracked per matter and per fee-earner — logged with user, timestamp and cost."
+    - title : "Configurable schemas"
+      icon : ti-panel
+      content : "The fields extracted from documents are defined by the firm — not hard-coded. Different schemas for leases, share-purchase agreements, litigation files."
+    - title : "UK hosting"
+      icon : ti-flag-alt
+      content : "Database and application hosted in the UK. AI inference can be routed via UK regions (Azure UK South) when required for sensitive matters."
+    - title : "Data stays yours"
+      icon : ti-lock
+      content : "No training on your data. No cross-firm data sharing. Your matter data is never used to improve any model."

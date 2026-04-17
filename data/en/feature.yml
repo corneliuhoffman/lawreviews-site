@@ -1,0 +1,20 @@
+feature:
+  enable : true
+  title : "The Solution"
+  subtitle : "Matters that understand themselves — Law Reviews ingests every document and email, analyses them with AI, and makes the entire archive instantly answerable."
+  items :
+    - title : "Email classification"
+      icon : ti-email
+      content : "Every incoming email is recognised, matched to the right matter, and saved with one click. Threads stay together. Attachments extracted, saved and analysed automatically."
+    - title : "Plain-English search"
+      icon : ti-search
+      content : "Ask any question across all files or within a single matter. Get an AI-synthesised answer with direct links to the source documents."
+    - title : "Auto-built timelines"
+      icon : ti-time
+      content : "Dates and deadlines extracted from emails and documents as they arrive. A live timeline maintained — no manual chronology building required."
+    - title : "Configurable schemas"
+      icon : ti-panel
+      content : "Define the fields the AI extracts. Different schemas for leases, share-purchase agreements, litigation files — driven by your firm, not hard-coded."
+    - title : "Document summary"
+      icon : ti-files
+      content : "Every document gets a plain-English summary. Every new version gets a summary of what changed — so nobody has to re-read the whole draft."

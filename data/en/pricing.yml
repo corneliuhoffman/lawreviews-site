@@ -1,0 +1,29 @@
+pricing:
+  enable : true
+  title : "Plans"
+  subtitle : "Pricing on request — contact us for a quote tailored to your firm."
+  items :
+    - title : "Web only"
+      icon : ti-world
+      bullets :
+        - Web application access
+        - Fast cloud AI models
+        - Standard UK support
+        - Add-ins available separately
+
+    - title : "Standard"
+      icon : ti-layers
+      bullets :
+        - Outlook + Word + Teams add-ins included
+        - All cloud models
+        - Custom schemas, KB imports
+        - Priority support
+
+    - title : "Pro"
+      icon : ti-crown
+      bullets :
+        - Large cloud credit allowance
+        - Local AI model — unmetered
+        - Dedicated UK Azure tenant option
+        - Named CSM, on-site training
+        - 99.5% SLA

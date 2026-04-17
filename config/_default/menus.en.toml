@@ -1,0 +1,40 @@
+################### Law Reviews Navigation ########################
+[[main]]
+name = "Problem"
+url = "#about"
+weight = 1
+
+[[main]]
+name = "Solution"
+url = "#feature"
+weight = 2
+
+[[main]]
+name = "How"
+url = "#services"
+weight = 3
+
+[[main]]
+name = "Where"
+url = "#where"
+weight = 4
+
+[[main]]
+name = "What"
+url = "#examples"
+weight = 5
+
+[[main]]
+name = "Features"
+url = "#trust"
+weight = 6
+
+[[main]]
+name = "Plans"
+url = "#pricing"
+weight = 7
+
+[[main]]
+name = "Request Demo"
+url = "mailto:corneliuhoffman@gmail.com?subject=Law%20Reviews%20Demo%20Request"
+weight = 8

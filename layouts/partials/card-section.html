@@ -1,0 +1,42 @@
+{{/*
+  Generic card-grid section. One template, reused for every section.
+  Layout is handled by CSS Grid with auto-fit + minmax, so the number
+  of cards per row scales with the viewport — cards always collapse
+  onto as few lines as possible.
+
+  Caller passes:
+    id   — section id / anchor
+    data — data block { enable, title, subtitle?, items: [...] }
+*/}}
+{{ if and .data .data.enable }}
+{{ with .data }}
+{{ $n := len .items }}
+{{/* Default to single-row: one column per card.  Caller can pass
+     `per_row` to force a balanced multi-row layout (e.g. 6 items in
+     3×2). Narrow viewports step down via media queries below. */}}
+{{ $cols := default $n $.per_row }}
+<section id="{{ $.id }}" class="bg-one section lr-card-section">
+  <div class="container">
+    <div class="lr-title">
+      <h2>{{ .title | safeHTML }}</h2>
+      {{ with .subtitle }}<p>{{ . | safeHTML }}</p>{{ end }}
+    </div>
+    <div class="lr-card-grid" data-n="{{ $n }}" style="--cols: {{ $cols }};">
+      {{ range .items }}
+      <div class="block">
+        <i class="card-icon {{ .icon }}"></i>
+        <h3>{{ .title | markdownify }}</h3>
+        {{ with .meta }}<p class="card-meta">{{ . | safeHTML }}</p>{{ end }}
+        {{ with .content }}<p>{{ . | markdownify }}</p>{{ end }}
+        {{ with .bullets }}
+        <ul class="card-bullets">
+          {{ range . }}<li>{{ . | markdownify }}</li>{{ end }}
+        </ul>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}

@@ -1,0 +1,17 @@
+{{ define "main" }}
+{{ $d := index .Site.Data .Site.Language.Lang }}
+
+{{ partial "navigation.html" . }}
+{{ partial "banner.html" . }}
+
+{{ partial "card-section" (dict "id" "about"    "data" $d.about.about) }}
+{{ partial "card-section" (dict "id" "feature"  "data" $d.feature.feature) }}
+{{ partial "card-section" (dict "id" "services" "data" $d.service.service) }}
+{{ partial "card-section" (dict "id" "where"    "data" $d.where.where) }}
+{{ partial "card-section" (dict "id" "examples" "data" $d.examples.examples) }}
+{{ partial "card-section" (dict "id" "trust"    "data" $d.trust.trust "per_row" 3) }}
+{{ partial "card-section" (dict "id" "pricing"  "data" $d.pricing.pricing) }}
+
+{{ partial "cta.html" . }}
+
+{{ end }}

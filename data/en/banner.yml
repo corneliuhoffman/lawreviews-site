@@ -1,0 +1,12 @@
+############################### Banner ################################
+banner:
+  enable : true
+  bg_image_webp : "images/backgrounds/hero-area.webp"
+  bg_image : "images/backgrounds/hero-area.jpg"
+  icon : ""
+  title : "Law Reviews"
+  content : "AI-powered document and matter intelligence for law firms. Ingest every document and email across your matters. Analyse with AI. Recall instantly in plain English."
+  button:
+    enable : true
+    label : "Request a Demo"
+    link : "mailto:corneliuhoffman@gmail.com?subject=Law%20Reviews%20Demo%20Request"

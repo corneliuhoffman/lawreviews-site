@@ -1,0 +1,20 @@
+about:
+  enable : true
+  title : "The Problem"
+  subtitle : "Every law firm, every day — thousands of documents, no way to find anything quickly."
+  items :
+    - icon : ti-search
+      title : Hunting for context
+      content : '"What did we agree in March?" — 20 minutes of digging through folders, hoping things were named correctly.'
+    - icon : ti-files
+      title : Reading everything by hand
+      content : "Lease agreements, board minutes, contracts — reviewed end-to-end every time a new fee-earner touches the file."
+    - icon : ti-time
+      title : Rebuilding chronologies
+      content : "Junior associates spend entire days assembling chronologies from overlapping email threads and attachments."
+    - icon : ti-alert
+      title : Missing critical detail
+      content : "A liability clause on page 47. A key date in a cc'd email. Buried. Missed. Costly."
+    - icon : ti-bag
+      title : Slow client onboarding
+      content : "A new client sends 500 unsorted documents. Hours of review before a fee estimate can even be proposed."

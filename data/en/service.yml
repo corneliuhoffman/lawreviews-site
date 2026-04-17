@@ -1,0 +1,17 @@
+service:
+  enable : true
+  title : "How it works"
+  subtitle : "From inbox to answer in three steps — plus a full audit trail."
+  items :
+    - title : Capture
+      icon : ti-cloud
+      content : "Emails arrive in Outlook. The Classify add-in offers one-click import into the right matter. Documents uploaded directly or synced from OneDrive / SharePoint."
+    - title : Analyse
+      icon : ti-light-bulb
+      content : "Each document and thread is sent to an AI model — Claude, GPT-4, Mistral, or your own local model. A configurable schema extracts the fields you care about."
+    - title : Recall
+      icon : ti-comment-alt
+      content : "From the web app, Outlook, Word or Teams, anyone with access asks a question in plain English. Synthesised answer with links back to source documents."
+    - title : Audit
+      icon : ti-shield
+      content : "Every version, every analysis, every approval — plus billable hours and AI costs per matter and per fee-earner — logged with user and timestamp."

@@ -1,0 +1,21 @@
+where:
+  enable : true
+  title : "Available where your fee-earners already work"
+  subtitle : "No new application to learn — embedded in the Microsoft 365 tools they use daily."
+  items :
+    - title : "Web app"
+      meta : "lawreviews.app"
+      icon : ti-world
+      content : "The full workspace. Upload documents, run rich queries, manage matters and clients, configure schemas and team access."
+    - title : "Outlook add-in — Classify"
+      meta : "Outlook desktop, web & mobile"
+      icon : ti-email
+      content : "From any email, one click imports it into the right matter. AI suggests the matter; the user confirms or overrides. Threads stay together."
+    - title : "Word add-in — Audit"
+      meta : "Word desktop & web"
+      icon : ti-pencil-alt
+      content : "Document audit, version comparison and approval workflow. Compare any two drafts side-by-side with OOXML diff. Route documents for partner sign-off."
+    - title : "Teams — Search bot"
+      meta : "Teams chat & compose"
+      icon : ti-comments
+      content : "Ask a question in plain English from any Teams chat. The bot searches your matters and replies with an AI-synthesised answer."
