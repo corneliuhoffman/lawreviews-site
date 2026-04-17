@@ -1,9 +1,0 @@
-[submodule "themes/hextra"]
-	path = themes/hextra
-	url = https://github.com/imfing/hextra
-[submodule "themes/blowfish"]
-	path = themes/blowfish
-	url = https://github.com/nunocoracao/blowfish
-[submodule "themes/meghna-hugo"]
-	path = themes/meghna-hugo
-	url = https://github.com/themefisher/meghna-hugo.git

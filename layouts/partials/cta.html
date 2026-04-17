@@ -1,0 +1,14 @@
+{{ $data := index site.Data site.Language.Lang }}
+{{ if $data.cta.cta.enable }}
+{{ with $data.cta.cta }}
+<section id="cta" class="call-to-action section">
+  <div class="container text-center">
+    <h2>{{ .title | markdownify }}</h2>
+    <p>{{ .content | markdownify }}</p>
+    {{ if .button.enable }}{{ with .button }}
+    <a href="{{ .link }}" class="btn btn-main">{{ .label }}</a>
+    {{ end }}{{ end }}
+  </div>
+</section>
+{{ end }}
+{{ end }}

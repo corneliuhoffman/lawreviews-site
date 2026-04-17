@@ -1,0 +1,11 @@
+<footer id="footer" class="section-bg">
+  <div class="container">
+    <div class="copyright text-center">
+      <p>{{ with site.Params.copyright }}{{ . | markdownify }}{{ else }}&copy; {{ now.Year }} Lith Ltd{{ end }}</p>
+    </div>
+  </div>
+</footer>
+
+<script src="{{ "plugins/jquery/jquery.min.js" | relURL }}"></script>
+<script src="{{ "plugins/bootstrap/bootstrap.min.js" | relURL }}"></script>
+<script src="{{ "js/parallax.js" | relURL }}"></script>

@@ -1,0 +1,14 @@
+<head>
+  <meta charset="utf-8">
+  <title>{{ .Title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+  {{ hugo.Generator }}
+
+  <link rel="stylesheet" href="{{ "plugins/bootstrap/bootstrap.min.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "plugins/themify-icons/themify-icons.css" | relURL }}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim|Quattrocento+Sans:400,700&display=swap">
+  <link rel="stylesheet" href="{{ "css/lawreviews.css" | relURL }}">
+
+  <link rel="icon" href="{{ "img/manuscript_gold.jpg" | relURL }}" type="image/jpeg">
+</head>
