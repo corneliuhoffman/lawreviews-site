@@ -1,9 +1,7 @@
 baseURL = "/"
 title = "Law Reviews"
+languageCode = "en-us"
 timeZone = "America/New_York"
-summaryLength = 15
-disableLanguages = ["fr"]
-hasCJKLanguage = false
 
 [build]
 noJSConfigInAssets = false
@@ -21,23 +19,4 @@ unsafe = true
 [params]
 description = "AI-powered document and matter intelligence for law firms."
 author = "Lith Ltd"
-
-[Languages.en]
-languageName = "En"
-languageCode = "en-us"
-contentDir = "content/english"
-
-[Languages.en.params]
-weight = 1
-home = "Home"
-copyright = "&copy; 2026 [Lith Ltd](https://lithltd.com)"
-
-[Languages.fr]
-languageName = "Fr"
-languageCode = "fr-fr"
-contentDir = "content/french"
-weight = 2
-
-[Languages.fr.params]
-home = "Accueil"
 copyright = "&copy; 2026 [Lith Ltd](https://lithltd.com)"
