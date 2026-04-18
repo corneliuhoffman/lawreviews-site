@@ -77,4 +77,33 @@
   }
   if (document.readyState !== 'loading') wireMobileMenuClose();
   else document.addEventListener('DOMContentLoaded', wireMobileMenuClose);
+
+  /* === Mobile section accordion ====================================
+     Below the CSS breakpoint (768px), card-section title cards become
+     tap-to-toggle. Nav-link clicks also open the target section so a
+     scroll lands on something readable, not a single closed bar. */
+  var MOBILE_BP = 768;
+  function isMobile() { return window.innerWidth < MOBILE_BP; }
+  function wireSectionAccordion() {
+    var titles = document.querySelectorAll('section.lr-card-section .lr-title');
+    for (var i = 0; i < titles.length; i++) {
+      titles[i].addEventListener('click', function () {
+        if (!isMobile()) return;
+        var section = this.closest('section.lr-card-section');
+        if (section) section.classList.toggle('lr-open');
+      });
+    }
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#"]');
+      if (!a || !isMobile()) return;
+      var id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      var section = document.getElementById(id);
+      if (section && section.classList.contains('lr-card-section')) {
+        section.classList.add('lr-open');
+      }
+    });
+  }
+  if (document.readyState !== 'loading') wireSectionAccordion();
+  else document.addEventListener('DOMContentLoaded', wireSectionAccordion);
 })();

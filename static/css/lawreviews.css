@@ -130,6 +130,40 @@ section.about > .container, section#feature > .container-fluid,
 section#services > .container, section#where > .container,
 section#examples > .container, section#trust > .container,
 section#pricing > .container, section.cta > .container { width: 100%; }
+
+/* === Mobile accordion =============================================
+   Below 768px, each section starts collapsed: only the title card
+   shows, cards are hidden. Tapping the title toggles `lr-open` on
+   the section, which expands the card grid. */
+@media (max-width: 767.98px) {
+  section.lr-card-section { min-height: auto !important; padding: 18px 0 !important; }
+  section.lr-card-section .lr-title {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    padding-right: 44px !important;
+  }
+  section.lr-card-section .lr-title::after {
+    content: "+";
+    position: absolute;
+    right: 16px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 26px; font-weight: 600;
+    color: var(--lr-gold-2);
+    line-height: 1;
+    transition: transform 0.2s ease;
+  }
+  section.lr-card-section.lr-open .lr-title::after {
+    content: "−";
+  }
+  section.lr-card-section .lr-card-grid {
+    display: none !important;
+  }
+  section.lr-card-section.lr-open .lr-card-grid {
+    display: grid !important;
+    margin-top: 14px;
+  }
+}
 /* Hero — kill the bg-image partial's inline background image so the
    parchment shows; keep a strong vignette for the headline */
 .hero-area, .banner-area {
