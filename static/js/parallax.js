@@ -78,32 +78,20 @@
   if (document.readyState !== 'loading') wireMobileMenuClose();
   else document.addEventListener('DOMContentLoaded', wireMobileMenuClose);
 
-  /* === Mobile section accordion ====================================
-     Below the CSS breakpoint (768px), card-section title cards become
-     tap-to-toggle. Nav-link clicks also open the target section so a
-     scroll lands on something readable, not a single closed bar. */
+  /* === Mobile per-card accordion ===================================
+     Below 768px, each card shows only its title; tap toggles the body
+     content. Above that, cards display normally and the handler is a
+     no-op. */
   var MOBILE_BP = 768;
   function isMobile() { return window.innerWidth < MOBILE_BP; }
-  function wireSectionAccordion() {
-    var titles = document.querySelectorAll('section.lr-card-section .lr-title');
-    for (var i = 0; i < titles.length; i++) {
-      titles[i].addEventListener('click', function () {
-        if (!isMobile()) return;
-        var section = this.closest('section.lr-card-section');
-        if (section) section.classList.toggle('lr-open');
-      });
-    }
+  function wireCardAccordion() {
     document.addEventListener('click', function (e) {
-      var a = e.target.closest && e.target.closest('a[href^="#"]');
-      if (!a || !isMobile()) return;
-      var id = a.getAttribute('href').slice(1);
-      if (!id) return;
-      var section = document.getElementById(id);
-      if (section && section.classList.contains('lr-card-section')) {
-        section.classList.add('lr-open');
-      }
+      if (!isMobile()) return;
+      var card = e.target.closest && e.target.closest('section .lr-card-grid > .block');
+      if (!card) return;
+      card.classList.toggle('lr-open');
     });
   }
-  if (document.readyState !== 'loading') wireSectionAccordion();
-  else document.addEventListener('DOMContentLoaded', wireSectionAccordion);
+  if (document.readyState !== 'loading') wireCardAccordion();
+  else document.addEventListener('DOMContentLoaded', wireCardAccordion);
 })();
