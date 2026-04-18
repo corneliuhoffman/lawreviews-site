@@ -20,10 +20,10 @@
    that bakes the colour matrix in — so we can use it as a plain CSS
    background-image and parallax it. */
 html { background: #050505 !important; color: var(--lr-fog) !important; }
-body, .body-wrapper {
+body {
   background: transparent !important;
   color: var(--lr-fog) !important;
-  position: relative;            /* anchor for the absolute-positioned nav */
+  position: relative;
 }
 /* Hero needs to be a positioning context so the nav can sit inside it */
 .hero-area, section.hero-area { position: relative; }
@@ -99,25 +99,19 @@ body, .body-wrapper {
 /* Only the hero stays transparent so the manuscript shows through.
    Every other section is its own opaque "page" — they stack over
    each other and cover the top page as the user scrolls down. */
-.banner-area, .hero-area, section.hero-area {
+.hero-area {
   background: transparent !important;
   background-image: none !important;
   position: relative;
   z-index: 0;               /* first page sits UNDER the rest */
-  overflow: hidden;         /* clip the parallaxed hero copy so it
-                               can't bleed into the section below */
+  overflow: hidden;
 }
-section.lr-card-section, section#about, section#feature, section.feature,
-section#services, section#where, section#examples, section#trust,
-section#pricing, section.pricing, section.cta, .cta-area, .bg-one {
-  background: rgba(5, 8, 14, 0.55) !important;   /* manuscript shows through the section */
+section.lr-card-section, section#cta {
+  background: rgba(5, 8, 14, 0.55) !important;
   background-image: none !important;
   position: relative;
   z-index: 5;
   box-shadow: 0 -18px 48px rgba(0,0,0,0.55);
-  /* Each section fills a viewport — cards sized up, section scales
-     vertically to match the window so each nav click lands on exactly
-     one "page". */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -126,10 +120,7 @@ section#pricing, section.pricing, section.cta, .cta-area, .bg-one {
   padding: 48px 0 !important;
   scroll-margin-top: 56px;
 }
-section.about > .container, section#feature > .container-fluid,
-section#services > .container, section#where > .container,
-section#examples > .container, section#trust > .container,
-section#pricing > .container, section.cta > .container { width: 100%; }
+section.lr-card-section > .container, section#cta > .container { width: 100%; }
 
 /* === Mobile per-card accordion ====================================
    Below 768px each card shows only its icon + h3. Body text, meta
@@ -170,17 +161,13 @@ section#pricing > .container, section.cta > .container { width: 100%; }
   }
   section .lr-card-grid > .block.lr-open > .card-bullets { padding-left: 0; }
 }
-/* Hero — kill the bg-image partial's inline background image so the
-   parchment shows; keep a strong vignette for the headline */
-.hero-area, .banner-area {
+/* Hero — vignette behind the headline */
+.hero-area {
   background-image: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.35)) !important;
   background-attachment: scroll !important;
 }
-.banner-area h1, .banner-area .banner-title,
-.hero-area h1, .hero-area .block h1 {
-  color: var(--lr-gold-2) !important; font-weight: 800; letter-spacing: -0.02em;
-}
-.banner-area p, .hero-area .block p { color: var(--lr-fog) !important; opacity: 0.95; }
+.hero-area h1 { color: var(--lr-gold-2) !important; font-weight: 800; letter-spacing: -0.02em; }
+.hero-area p  { color: var(--lr-fog) !important; opacity: 0.95; }
 
 /* === Buttons === */
 .btn, .btn-main, .btn-default, button.btn {
@@ -200,57 +187,11 @@ section#pricing > .container, section.cta > .container { width: 100%; }
 /* === Section text === */
 section { color: var(--lr-fog) !important; padding: 28px 0 !important; }
 section .container { max-width: 1180px !important; }
-section .section-title h2, section h2.section-title, .title-area h2,
-section .title h2 {
-  color: var(--lr-gold-2) !important;
-  font-family: "EB Garamond","Cardo",Georgia,serif;
-  font-size: 24px !important;
-  line-height: 1.2 !important;
-  margin: 0 0 6px !important;
-}
-section .title p { font-size: 13px !important; color: var(--lr-mute) !important; margin: 0 0 8px !important; }
-section .section-title h2::after { background: var(--lr-gold) !important; }
 section h3, section h4 { color: #fff !important; }
 section p, section li { color: var(--lr-fog) !important; }
 hr { border-color: rgba(201,150,42,0.25) !important; }
 
-/* Override Meghna's teal accent .color span used inside section titles —
-   make it gold to stay on-palette */
-section .title h2 .color, section .title h2 span.color,
-.title h2 .color { color: var(--lr-gold) !important; }
-.border-meghna {
-  border-top: 2px solid rgba(201,150,42,0.35) !important;
-  width: 60px !important;
-  margin: 12px auto 24px !important;
-}
-.border-meghna::before, .border-meghna:before {
-  background: var(--lr-gold) !important;
-  background-color: var(--lr-gold) !important;
-  width: 50px !important;
-  height: 4px !important;
-}
-
-/* Every section gets a consistent one-row title card at the top — same
-   dark plate + gold border as the content cards below. */
-section .title {
-  background: #0a0f1c !important;
-  padding: 14px 20px 12px !important;
-  border-radius: 10px;
-  border: 1px solid rgba(201,150,42,0.30) !important;
-  backdrop-filter: blur(2px);
-  margin: 0 0 14px !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  display: block !important;
-  text-align: center !important;
-  box-sizing: border-box !important;
-}
-section .title .border-meghna { display: none !important; }   /* no extra rule in title cards */
-section .title p:last-child { margin-bottom: 0 !important; }
-section .title h2 { text-align: center !important; text-transform: none !important; }
-section .title p  { text-align: center !important; }
-
-.hero-area .block, .cta .container, section.cta .container {
+.hero-area .block, section#cta > .container {
   background: #0a0f1c !important;
   padding: 20px 24px !important;
   border-radius: 10px;
@@ -296,96 +237,16 @@ section .title p  { text-align: center !important; }
   width: 100%;
   height: auto;
 }
-.cta h2, section.cta h2 { color: var(--lr-gold-2) !important; }
-.cta p, section.cta p { color: var(--lr-fog) !important; }
+section#cta h2 { color: var(--lr-gold-2) !important; }
+section#cta p  { color: var(--lr-fog) !important; }
 
-/* No section-wide dark overlay — let the parchment show. The cards
-   themselves carry their own background so text remains readable. */
+/* No section-wide dark overlay — let the parchment show. */
 section::before { display: none !important; }
-section > .container, section > .container-fluid { position: relative; z-index: 1; }
-.hero-area::before, .banner-area::before { display: none !important; }
+section > .container { position: relative; z-index: 1; }
+.hero-area::before { display: none !important; }
 
-/* === Hide the picture column in the Feature section === */
-section#feature .col-lg-6:first-child,
-section.feature .col-lg-6:first-child { display: none !important; }
-section#feature .col-lg-6:last-child,
-section.feature .col-lg-6:last-child { flex: 0 0 100% !important; max-width: 100% !important; }
-
-/* Kill Meghna's hard-coded blue-grey background on section-bg */
-section.section-bg, section.about-2, .section-bg { background: transparent !important; }
-section#feature .content-block .media i,
-section.feature .content-block .media i { color: var(--lr-gold) !important; }
-
-/* Wrap the whole content-block in a card so the heading + paragraph
-   read against the manuscript */
-section#feature .content-block, section.feature .content-block {
-  background: #0a0f1c !important;
-  border: 1px solid rgba(201,150,42,0.30) !important;
-  border-radius: 10px;
-  padding: 24px 32px !important;
-  backdrop-filter: blur(2px);
-  text-align: center;
-}
-section#feature .content-block > p,
-section.feature .content-block > p {
-  text-align: center; max-width: 760px; margin: 0 auto 16px !important;
-}
-section#feature .content-block h2,
-section.feature .content-block h2 {
-  color: var(--lr-gold-2) !important;
-  font-family: "EB Garamond","Cardo",Georgia,serif;
-  font-size: 24px !important;
-  text-align: center;
-  margin: 0 0 8px !important;
-}
-
-/* Each feature item (media block) gets its own inner card */
-section#feature .content-block .media,
-section.feature .content-block .media {
-  background: #0a0f1c !important;
-  border: 1px solid rgba(201,150,42,0.25) !important;
-  border-radius: 8px;
-  padding: 20px 18px !important;
-  margin-top: 16px !important;
-}
-section#feature .content-block .media h4,
-section.feature .content-block .media h4 { color: #fff !important; }
-
-/* === Cards: equal height via flex on the row, stretched blocks ===
-   Meghna markup we target:
-     About    : section.about        .row > .col-lg-4    > .block
-     Service  : section#services     .row > article.col  > .service-block
-     Feature  : section.feature      .row > .col          > .feature
-*/
-section.about .row, section#services .row, section.feature .row {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  align-items: stretch !important;
-}
-section.about .row > [class*="col-"],
-section#services .row > [class*="col-"],
-section.feature .row > [class*="col-"] {
-  display: flex !important;
-  margin-bottom: 24px !important;
-}
-
-/* Make every card render as a card with equal height */
-/* === Unified card style — icon + title on the same row, paragraph
-   below, across every section.  We don't touch Meghna's HTML here;
-   CSS Grid + `display: contents` flattens the theme's `.content`
-   wrapper so the h3 and p become direct grid children alongside the
-   icon.  The `.card-head` wrapper my partials also produce works
-   with the same rules via the grouped selector below. */
-section .block .content, section .service-block .content,
-section .feature-item .content { display: contents; }
-section .block,
-section .service-block,
-section .feature-item,
-section .content-block .media,
-section#examples .block,
-section#trust .block,
-section#where .service-block,
-.price-item {
+/* === Unified card — icon left, title right (same row), body below === */
+section .block {
   background: #0a0f1c !important;
   border: 1px solid rgba(201, 150, 42, 0.30) !important;
   color: var(--lr-fog) !important;
@@ -401,25 +262,33 @@ section#where .service-block,
   padding: 20px 18px !important;
   min-height: 180px !important;
   box-shadow: none !important;
-  -webkit-box-shadow: none !important;
   transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
   font-family: "Anaheim", "Helvetica Neue", Arial, sans-serif;
 }
-/* Icon in column 1, heading in column 2, paragraphs (including optional
-   .card-meta) span both columns on subsequent rows. */
-section .block > .card-icon,
-section .block > .icon-box,
-section .service-block > .service-icon,
-section .feature-item > .icon-box {
+section .block > .card-icon {
   grid-column: 1; grid-row: 1; align-self: center;
   font-size: 32px !important; color: var(--lr-gold) !important;
   margin: 0 !important;
 }
 section .block > h3 {
-  grid-column: 2; grid-row: 1; align-self: center; margin: 0 !important;
+  grid-column: 2; grid-row: 1; align-self: center;
+  font-family: "Anaheim", "Helvetica Neue", Arial, sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  margin: 0 !important;
+  line-height: 1.25 !important;
+  text-align: left !important;
 }
 section .block > p, section .block > .card-meta {
   grid-column: 1 / -1;
+  font-family: "Anaheim", "Helvetica Neue", Arial, sans-serif !important;
+  font-size: 15px !important;
+  line-height: 1.55 !important;
+  color: var(--lr-fog) !important;
+  opacity: 0.92;
+  margin: 0 !important;
+  text-align: left !important;
 }
 section .block > .card-meta {
   font-size: 12px !important;
@@ -474,8 +343,6 @@ section .lr-card-grid {
    rows differ by at most 1 card. This works on any viewport (incl.
    mobile) without arbitrary breakpoints. The default below is a sane
    fallback before JS runs. */
-section .lr-card-grid > .block { height: 100%; }
-
 /* Title card sits above the grid, full width */
 section .lr-title {
   background: #0a0f1c;
@@ -500,92 +367,21 @@ section .lr-title p {
   margin: 0;
 }
 
-/* Kill Meghna's decorative hexagon pseudo-elements on .icon-box */
-section .icon-box, section .service-icon {
-  position: static !important;
-  width: auto !important; height: auto !important;
-  margin: 0 0 10px !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border: none !important;
-  display: block !important;
-  text-align: left !important;
-}
-section .icon-box::before, section .icon-box::after,
-section .service-icon::before, section .service-icon::after {
-  content: none !important;
-  display: none !important;
-  background: transparent !important;
-  border: none !important;
-}
-section .icon-box i, section .service-icon i,
-section .block i, section .service-block i, section .feature-item i {
-  font-size: 22px !important;
-  color: var(--lr-gold) !important;
-  display: inline-block;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Unified card typography — same font + sizes everywhere */
-section .block h3, section .service-block h3, section .feature-item h3,
-section .content-block .media h4, section#examples .block h3,
-section#trust .block h3, .price-item h3 {
-  font-family: "Anaheim", "Helvetica Neue", Arial, sans-serif !important;
-  font-size: 20px !important;
-  font-weight: 700 !important;
-  color: #fff !important;
-  margin: 4px 0 6px !important;
-  line-height: 1.25 !important;
-  text-align: left !important;
-}
-section .block p, section .service-block p, section .feature-item p,
-section .content-block .media p, section#examples .block p,
-section#trust .block p, .price-item p {
-  font-family: "Anaheim", "Helvetica Neue", Arial, sans-serif !important;
-  font-size: 15px !important;
-  line-height: 1.55 !important;
-  color: var(--lr-fog) !important;
-  opacity: 0.92;
-  margin: 0 !important;
-  text-align: left !important;
-}
-section .block:hover,
-section .service-block:hover,
-section .feature-item:hover,
-section .content-block .media:hover,
-.price-item:hover {
+section .block:hover {
   border-color: var(--lr-gold) !important;
   background: #162a4d !important;
   transform: translateY(-2px);
 }
 
-/* All cards share the unified .block style defined above. Per-section
-   colour tinges are the only per-section difference. Icon colour is
-   set once for any themify icon. */
 i[class^="ti-"] { color: var(--lr-gold) !important; }
 
 /* === CTA section === */
-.cta-area, section.cta {
+section#cta {
   background: linear-gradient(135deg, var(--lr-navy-2) 0%, var(--lr-navy) 100%) !important;
   color: #fff !important;
 }
-.cta-area h2 { color: var(--lr-gold) !important; }
+section#cta h2 { color: var(--lr-gold) !important; }
 
 /* === Footer === */
-footer, .footer-area, .footer { background: #08122A !important; color: var(--lr-mute) !important; border-top: 1px solid var(--lr-navy-2) !important; }
+footer { background: #08122A !important; color: var(--lr-mute) !important; border-top: 1px solid var(--lr-navy-2) !important; }
 footer a { color: var(--lr-gold) !important; }
-
-/* === Parallax sections (used by Andromeda-style backgrounds we add) === */
-.lr-parallax {
-  background-attachment: fixed !important;
-  background-size: cover !important;
-  background-position: center center !important;
-  position: relative;
-}
-.lr-parallax::before {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(15,31,61,0.88), rgba(26,50,96,0.78));
-  z-index: 0;
-}
-.lr-parallax > .container, .lr-parallax > * { position: relative; z-index: 1; }
